@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Pizza Pie</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+<body>
+ 
+
+
+    <div class="topo-fixo z-depth-1">
+        <div class="valign-wrapper yellow darken-4 white-text ">
+            <h5 class="titulo">Pizza Pie</h5>
+            <div>
+
+                <i class="material-icons waves-effect right waves-light waves-circle">
+                    <a style=" color: inherit;" id="pedidosRealizados" data-target="slide-out" class="sidenav-trigger"  href="#">
+                         local_pizza
+                        </a>
+                     </i>
+                    <div id="badgePedido"></div>
+                </div>
+            <div>
+                <i id="check" class="material-icons waves-effect right waves-light waves-circle ">
+                    <a class=" modal-trigger" style=" color: inherit;" href="#modal" >
+                        local_grocery_store
+                    </a>
+                </i>
+            </div>
+
+           <!--   Icone de configuração 
+            <div>
+                <i id="check" class="material-icons waves-effect right waves-light waves-circle ">
+                    <a class="" style=" color: inherit;" href="#" >
+                        phonelink_setup
+                    </a>
+    
+                </i>
+            </div>
+           -->
+
+        </div>
+    </div>
+
+        <div class="nav-content yellow darken-4 row">
+          <ul class="tabs tabs-transparent">
+            <li class="tab col s4"><a class="active" href="#test1" >Salgados</a></li>
+            <li class="tab col s4"><a href="#test2">bebidas </a></li>
+            <li class="tab col s4"><a href="#test3">sobremesa</a></li>
+          </ul>
+        </div>
+
+
+
+
+<!-- Sidbar dos pedidos realizados -->
+  <div id="slide-out" class="sidenav">
+      <div  class="valign-wrapper yellow darken-4 white-text topo-fixo navbar-fixed">
+          <i class="material-icons waves-effect  left waves-light waves-circle"><a style=" color: inherit;" class="sidenav-close" id="close-arrow" href="#"> arrow_back</a> </i>
+          <h5 style=" margin-bottom: 15px; margin-left: 5px;">Pedidos</h5>           
+      </div>
+
+     <div class="container">
+  <!-- Modal remove ordem de serviço da lista -->
+  <div id="deleteItemAertModal" class="modalDelete modal">
+    <div class="modal-content">
+      <h4>Apagado com sucesso!</h4>
+      <p>Essa ordem de serviço foi exlcluida!</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="removerItem modal-close waves-effect waves-green btn-flat">OK</a>
+    </div>
+  </div>
+
+
+        <div id="lista-servico" class="row">
+            <!-- Lista de Pedidos realizados -->
+        </div>
+     </div>
+ </div>
+        
+
+    
+<!-- Modal do carrinho -->
+<div id="modal" class="modal modal-fixed-footer">
+        <span id="total" class="badge green" style="float:right; color:white;"></span>
+    <div class="modal-content">
+            <div class="input-field ">
+                    <select>
+                      <option value="1">Mesa 1</option>
+                      <option value="2">Mesa 2</option>
+                      <option value="3">Mesa 3</option>
+                      <option value="4">Mesa 4</option>
+                      <option value="5">Mesa 5</option>
+                      <option value="6">Mesa 6</option>
+                      <option value="7">Mesa 7</option>
+                      <option value="8">Mesa 8</option>
+                      <option value="9">Mesa 9</option>
+                      <option value="10">Mesa 10</option>
+                      <option value="11">Mesa 11</option>
+                      <option value="12">Mesa 12</option>
+                      <option value="13">Mesa 13</option>
+                      <option value="14">Mesa 14</option>
+                      <option value="15">Mesa 15</option>
+
+                    </select>
+                    <label>Selecione Mesa</label>
+                  </div>
+     <div id="list">
+          
+     </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green  btn-flat left">voltar</a>
+      <a id="pedir" href="#!" class="modal-close waves-effect waves-purple btn-small green">Pedir</a>
+    </div>
+  </div>
+          
+
+
+      <div id="test1" class="col s12">
+          <h4 class="header center orange-text">Salgados</h4>
+          <div id="salgados" class="section">
+              <h6 class="container brown-text">Pizza media</h6>
+              <div class="collection">
+                  <a id="1" class="collection-item waves-effect black-text item-pedido item-pedido">Pizza Calabresa (M) <span class="badge quant "></span></a>
+                  <a id="2" class="collection-item waves-effect black-text item-pedido item-pedido">Pizza Catupiry (M)<span class="badge quant"></span></a>
+                  <a id="3"class="collection-item waves-effect black-text item-pedido item-pedido">Pizza Mussarela (M)<span class="badge quant"></span></a>
+                  <a id="4" class="collection-item waves-effect black-text item-pedido item-pedido">Pizza Portuguesa (M)<span class="badge quant"></span></a>
+              </div>
+      
+              <h6 class="container brown-text">Pizza grande</h6>
+              <div class="collection">
+                <a id="5" class="collection-item waves-effect black-text item-pedido item-pedido">Pizza Calabresa (G)<span class="badge quant"></span></a>
+                <a id="6" class="collection-item waves-effect black-text item-pedido item-pedido">Pizza Catupiry (G)<span class="badge quant"></span></a>
+                <a id="7" class="collection-item waves-effect black-text item-pedido item-pedido">Pizza Mussarela (G)<span class="badge quant"></span></a>
+                <a id="8" class="collection-item waves-effect black-text item-pedido item-pedido">Pizza Portuguesa (G)<span class="badge quant"></span></a>
+           </div>
+          </div>
+
+
+      </div>
+      <div id="test2" class="col s12">
+
+          <h4 class="header center orange-text">Bebidas</h4>
+
+                
+          <div id="bebidas" class="section">
+              <h6 class="container brown-text">Refrigerantes</h6>
+              <div class="collection">
+                  <a  id="9" class="collection-item waves-effect black-text item-pedido">Refri. Coca-cola <span class="badge quant"></span></a>
+                  <a  id="10" class="collection-item waves-effect black-text item-pedido">Refri. Guaraná <span class="badge quant"></span></a>
+                  <a  id="11" class="collection-item waves-effect black-text item-pedido">Refri. Soda <span class="badge quant"></span></a>
+              </div>
+      
+              <h6 class="container brown-text">Vitaminas</h6>
+              <div class="collection">
+                  <a  id="12" class="collection-item waves-effect black-text item-pedido">Vitamina Goiaba <span class="badge quant"></span></a>
+                  <a  id="13" class="collection-item waves-effect black-text item-pedido">Vitamina Acerola<span class="badge quant"></span></a>
+                  <a  id="14" class="collection-item waves-effect black-text item-pedido">Vitamina Banana <span class="badge quant"></span></a>
+              </div>
+      
+              <h6 class="container brown-text">Sucos</h6>
+              <div class="collection">
+                  <a id="15" class="collection-item waves-effect black-text item-pedido">Suco Melancia <span class="badge quant"></span></a>
+                  <a id="16" class="collection-item waves-effect black-text item-pedido">Suco Tangerin <span class="badge quant"></span></a>
+                  <a id="17" class="collection-item waves-effect black-text item-pedido">Suco Limão <span class="badge quant"></span></a>
+              </div>
+
+              <h6 class="container brown-text">Cafés</h6>
+              <div class="collection">
+                  <a id="18"class="collection-item waves-effect black-text item-pedido">Café Expresso<span class="badge quant"></span></a>
+                  <a id="19"class="collection-item waves-effect black-text item-pedido">CappucCino<span class="badge quant"></span></a>
+                  <a id="20" class="collection-item waves-effect black-text item-pedido">Café Normal<span class="badge quant"></span></a>
+              </div>
+          </div>
+      
+
+      </div>
+      <div id="test3" class="col s12">
+
+          <h4 class="header center orange-text">Sobremesas</h4>
+
+               
+          <div id="sobremesa" class="section">
+              <h6 class="container brown-text">Bolos</h6>
+              <div class="collection">
+                  <a id="21" class="collection-item waves-effect black-text item-pedido">Bolo de cenoura <span class="badge quant"></span></a>
+                  <a id="22" class="collection-item waves-effect black-text item-pedido">Bolo de chocolate <span class="badge quant"></span></a>
+                  <a id="23" class="collection-item waves-effect black-text item-pedido">Bolo Confetado <span class="badge quant"></span></a>
+              </div>
+      
+              <h6 class="container brown-text">Pudim</h6>
+              <div class="collection">
+                  <a id="24" class="collection-item waves-effect black-text item-pedido">Pudim de Chocolate <span class="badge quant"></span></a>
+                  <a id="25" class="collection-item waves-effect black-text item-pedido">Pudim de Morango <span class="badge quant"></span></a>
+                  <a id="26" class="collection-item waves-effect black-text item-pedido">Pudim de leite <span class="badge quant"></span></a>
+              </div>
+      
+              <h6 class="container brown-text">Sorvete</h6>
+              <div class="collection">
+                  <a id="27" class="collection-item waves-effect black-text item-pedido">Sorv. chocolate <span class="badge quant"></span></a>
+                  <a id="28" class="collection-item waves-effect black-text item-pedido">Sorv. uva <span class="badge quant"></span></a>
+                  <a id="29" class="collection-item waves-effect black-text item-pedido">Sorv. Morango <span class="badge quant"></span></a>
+              </div>
+          </div>
+      
+      </div>
+            
+
+
+<footer class="page-footer  yellow darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">versão Beta 5.0.1</h5>
+          <p class="grey-text text-lighten-4">Código:  <a href="https://github.com/Rafa-MKR2/pizza-pie.git"> Pizza Pie git</a> </a></p>
+        </div>
+       
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2019 Copyright 
+      <a class="grey-text text-lighten-4 right" href="https://github.com/Rafa-MKR2">Rafael D.Carmo</a>
+      </div>
+    </div>
+  </footer>
+      
+ 
+  <!--  Jquery e Materialize -->
+  <script src="js/lib/jquery-2.1.1.min.js"></script>
+  <script src="js/lib//materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+  <script src="js/lib/system.min.js"></script>
+
+  <script>
+
+      System.defaultJSExtensions = true;
+      System.import('./js/app.js').catch(e=> console.log(e))
+
+   
+</script>
+
+   </body>
+</html>

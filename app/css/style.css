@@ -1,0 +1,72 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+body{
+  background-color: #f5f5f5;
+}
+
+/* estilo inicial */
+body {
+  background-color: #F2F2F2;
+}
+
+/* estilo do titulo */
+.titulo {
+  font-size: 1.3rem;
+  margin-left: 5%;
+  margin-right: auto;
+}
+
+.carBadger{
+  color:white;
+
+  margin-top:35px;
+  border-radius: 10px;
+  position: absolute;
+  height: 20px; 
+  width: 20px;
+  margin-right: 10px;
+}
+
+.itensBadge{
+
+  margin-top:40px; 
+  position:absolute; 
+  border-radius: 20px;
+  color:white;
+  margin-right:10px;
+}
+
+
+.delete{
+    color: hsl(180, 30%, 95%);
+    background-color: rgb(238, 13, 13);
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    border-radius: 50%; 
+    left: auto;
+    right: -7px;
+    top: -7px;
+    z-index: 1;
+    box-shadow: black 2px 2px p2x;
+    border: 0px;
+}
+
+
+ .delete:hover{
+  color: #fff;
+  background-color: #f18306;
+}
