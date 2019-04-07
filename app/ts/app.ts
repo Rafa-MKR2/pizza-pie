@@ -47,7 +47,7 @@ $(document).ready(function(){
 
     let pedido: Pedido = {
             id : $(this).attr('id'),
-            nome : $(this).text().substr(0,($(this).text().length - 1)),
+            nome : $(this).text().substr(0,($(this).text().length - 11)),
             quantidade : quant+1,
             preco: 40
         }

@@ -2,7 +2,7 @@ const app = require('./config/express-config')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 
 
  app.get('/', function(req, res){

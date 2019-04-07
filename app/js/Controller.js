@@ -26,7 +26,7 @@ System.register(["./models/Carrinho.js", "./service/PizzaPieService.js", "./mode
             Controllers = class Controllers {
                 constructor() {
                     this._serviceApi = new PizzaPieService_js_1.PizzaPieService();
-                    this._socket = io.connect('http://localhost:3000');
+                    this._socket = io.connect('https://pizza-appi.herokuapp.com/');
                     this._mensagem = new Mensagem_js_1.Mensagem();
                     this._carrinho = new Carrinho_js_1.Carrinho();
                     this._socket.on('conexao', (data) => console.log(data));
