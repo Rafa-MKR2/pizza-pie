@@ -8,7 +8,7 @@ export class Servico{
   private _hora:Date;
   private _pedidos: Pedido[];
 
-  private _total: number;
+  private _total: number =0;
 
 
     constructor(ordem:ApiFirebase){
@@ -16,7 +16,13 @@ export class Servico{
     this._id = ordem.id
     this._hora = new Date(ordem.hora)
     this._pedidos = ordem.pedidos;
+    
+    this.pedidos.forEach(item=> this._total = this._total+ (item.quantidade * item.preco))
 
+  }
+
+  get total():number{
+     return this._total 
   }
 
   get id(){
@@ -32,7 +38,7 @@ export class Servico{
    let lista:Pedido[] =[];
 
    // joga todos itens dentro de um lista
-    for (var i in this._pedidos) {
+    for(var i in this._pedidos) {
       lista.push({
             id: this._pedidos[i].id,
             nome: this._pedidos[i].nome,

@@ -22,11 +22,18 @@ System.register(["./Controller.js"], function (exports_1, context_1) {
                     $(this).addClass("orange");
                     $(this).children(".quant").addClass('white');
                     $(this).children(".quant").css({ color: "brown" });
+                    $(this).children(".remove").css({ color: "white" });
+                    $(this).children(".remove").html(`<i style="color:white;" class="material-icons  remove">backspace</i>`);
                     $(this).children(".quant").text(quant + 1);
+                    $(this).children(".remove").click(function () {
+                        $(this).children(".quant").text(-1);
+                    }.bind(this));
                     if (quant <= -1) {
                         $(this).removeClass("orange");
                         $(this).children(".quant").removeClass('white');
                         $(this).children(".quant").css({ color: "white" });
+                        $(this).children(".remove").css({ color: "white" });
+                        $(this).children(".remove").html(``);
                     }
                     let pedido = {
                         id: $(this).attr('id'),
@@ -47,20 +54,19 @@ System.register(["./Controller.js"], function (exports_1, context_1) {
                     $('#list').html('');
                     let total = 0.0;
                     controller.pedidosNoCarrinho.forEach(itens => {
-                        let htmlString = `
+                        total = total + (itens.quantidade * itens.preco);
+                        $('#list').append(`
             <blockquote class="blockquoteColor indigo lighten-5">
             ${itens.nome}
             <span class="right" style="font-size:13px;">
             ${itens.quantidade} x R$ ${itens.preco}.00
             </span>
-            </blockquote>`;
-                        total = total + (itens.quantidade * itens.preco);
-                        $('#list').append(htmlString);
+            </blockquote>`);
                     });
                     $('#total').html(`TOTAL : R$ ${total}.00`);
                 });
                 $('#pedir').click(function () {
-                    if (controller.pedidosNoCarrinho.length == 0)
+                    if (controller.pedidosNoCarrinho.length === 0)
                         M.toast({ html: `<span>Não há itens selecionados</span>` });
                     else {
                         controller.enviarPedidos({
