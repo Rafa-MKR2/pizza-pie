@@ -110,12 +110,13 @@ async listarPedidos(){
     ${
       service.pedidos.map(item=>{
         return `<li class="collection-item">
-        ${item.nome} <span class="badge" style="margin-top:5px;">X ${item.quantidade}</span>
+        ${item.nome} <span class="badge" style="margin-top:5px;">${item.quantidade} X 
+        <span style="color:green;">R$${item.preco},00</span></span>
         </li> `
       }).join('')
     }
        </ul>
-       <a class="right" href="#">Total: R$00.00</a>
+       <a class="right" style="color:green;" href="#">Total: R$${service.total}.00</a>
        <a  href="#">${service.hora}</a>
         </div>
       </div>

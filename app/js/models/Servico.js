@@ -11,9 +11,14 @@ System.register(["../helpers/DateHelper.js"], function (exports_1, context_1) {
         execute: function () {
             Servico = class Servico {
                 constructor(ordem) {
+                    this._total = 0;
                     this._id = ordem.id;
                     this._hora = new Date(ordem.hora);
                     this._pedidos = ordem.pedidos;
+                    this.pedidos.forEach(item => this._total = this._total + (item.quantidade * item.preco));
+                }
+                get total() {
+                    return this._total;
                 }
                 get id() {
                     return this._id;
