@@ -43,11 +43,13 @@ $(document).ready(function(){
         $(this).children(".remove").html(``);
     
         
-    }
+    } 
 
-    let pedido: Pedido = {
+  let  TratarNomeDoItem = $(this).text().substr(0,($(this).text().trim().length-11))
+
+  let pedido: Pedido = {
             id : $(this).attr('id'),
-            nome : $(this).text().substr(0,($(this).text().length - 1)),
+            nome : TratarNomeDoItem.replace(/\s{2}/g, ''),
             quantidade : quant+1,
             preco: 40
         }

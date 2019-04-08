@@ -35,9 +35,10 @@ System.register(["./Controller.js"], function (exports_1, context_1) {
                         $(this).children(".remove").css({ color: "white" });
                         $(this).children(".remove").html(``);
                     }
+                    let TratarNomeDoItem = $(this).text().substr(0, ($(this).text().trim().length - 11));
                     let pedido = {
                         id: $(this).attr('id'),
-                        nome: $(this).text().substr(0, ($(this).text().length - 1)),
+                        nome: TratarNomeDoItem.replace(/\s{2}/g, ''),
                         quantidade: quant + 1,
                         preco: 40
                     };

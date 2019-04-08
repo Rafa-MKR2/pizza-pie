@@ -11,7 +11,7 @@ import { Mensagem } from './models/Mensagem.js';
    private _carrinho: Carrinho;
    private _serviceApi = new PizzaPieService();
    private _OrdemDePedidos:Servico[];
-   private _socket = io.connect('http://localhost:3000');
+   private _socket = io.connect('http://localhost:8080');
    private _mensagem: Mensagem = new Mensagem();
 
     constructor(){
