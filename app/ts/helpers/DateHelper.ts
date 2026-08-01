@@ -41,4 +41,8 @@ export class DateHelper{
          
      }
 
+    static real(valor: number): string{
+        return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
 }

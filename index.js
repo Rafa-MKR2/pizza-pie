@@ -36,4 +36,8 @@ io.on('connection', function (socket) {
   socket.on('exclusao', function (data) {
     socket.broadcast.emit('exclusao', data);
   });
+
+  socket.on('status', function (data) {
+    socket.broadcast.emit('status', data);
+  });
 });

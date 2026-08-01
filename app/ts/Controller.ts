@@ -3,6 +3,7 @@ import { ApiFirebase } from './models/ApiFirebase.js';
 import { PizzaPieService } from './service/PizzaPieService.js';
 import { Servico } from './models/Servico.js';
 import { Mensagem } from './models/Mensagem.js';
+import { DateHelper } from './helpers/DateHelper.js';
 
 
  
@@ -27,6 +28,10 @@ import { Mensagem } from './models/Mensagem.js';
         this._socket.on('exclusao', (data: ApiFirebase)=> { 
           this.listarPedidos()
           this.playNotification('Item deletado!', 60000)
+        })
+
+        this._socket.on('status', (data: ApiFirebase)=> {
+          this.listarPedidos()
         })
         // verfica se audio navegador  estar habilitado
         this.playNotification('Audio do seu navagador foi habilitado!',5000)
@@ -82,6 +87,17 @@ async listarPedidos(){
 
     }
 
+    atualizarStatus(key: string, status: string){
+      return this._serviceApi.atualizarStatus(key, status)
+        .then(()=> this.listarPedidos())
+        .then(()=> this._socket.emit('status', { key, status }))
+        .catch(err=> console.log(err))
+    }
+
+    carregarCardapio(): Promise<any>{
+      return this._serviceApi.obterCardapio();
+    }
+
    private _update(services: Servico[]){
 
     
@@ -101,7 +117,7 @@ async listarPedidos(){
        <i class="material-icons">delete_forever</i>
      </button>
         <div class="card-image">
-        <h6></h6>
+        <h6><span class="chip status-chip status-${service.status}">${service.status.replace('_',' ')}</span></h6>
         </div>
         <div class="card-content">
         <ul class="collection">
@@ -109,18 +125,36 @@ async listarPedidos(){
       service.pedidos.map(item=>{
         return `<li class="collection-item">
         ${item.nome} <span class="badge" style="margin-top:5px;">${item.quantidade} X 
-        <span style="color:green;">R$${item.preco},00</span></span>
+        <span style="color:green;">${DateHelper.real(item.preco)}</span></span>
         </li> `
       }).join('')
     }
        </ul>
-       <a class="right" style="color:green;" href="#">Total: R$${service.total}.00</a>
+       <a class="right" style="color:green;" href="#">Subtotal: ${DateHelper.real(service.subtotal)}</a>
+       <a class="right" style="color:brown;" href="#">Taxa 10%: ${DateHelper.real(service.taxa)}</a>
+       <a class="right" style="color:green;" href="#">Total: ${DateHelper.real(service.total)}</a>
        <a  href="#">${service.hora}</a>
+       <div class="input-field">
+          <select class="status-select" data-id="${service.id}">
+            <option value="pendente" ${service.status === 'pendente' ? 'selected' : ''}>Pendente</option>
+            <option value="em_preparo" ${service.status === 'em_preparo' ? 'selected' : ''}>Em preparo</option>
+            <option value="pronto" ${service.status === 'pronto' ? 'selected' : ''}>Pronto</option>
+            <option value="entregue" ${service.status === 'entregue' ? 'selected' : ''}>Entregue</option>
+          </select>
+          <label>Status do pedido</label>
+       </div>
         </div>
       </div>
     </div>
     </div>`);
        })
+
+       $('.status-select').formSelect();
+       $('.status-select').on('change', function(){
+         const id = $(this).attr('data-id');
+         const status = $(this).val() as string;
+         if (id) this.atualizarStatus(id, status);
+       }.bind(this))
 
 
        const contextoDeController = (id: string) => this.deletar(id);

@@ -1,12 +1,36 @@
 import { Controllers } from './Controller.js';
+import { DateHelper } from './helpers/DateHelper.js';
+import { TAXA_SERVICO } from './models/Servico.js';
 const controller = new Controllers();
+function renderCardapio(cardapio) {
+    cardapio.categorias.forEach(categoria => {
+        const container = $(`#${categoria.id}`);
+        container.find('.cardapio-section').remove();
+        container.find('h4.header').after(`<div class="cardapio-section section"></div>`);
+        const secao = container.find('.cardapio-section');
+        categoria.grupos.forEach(grupo => {
+            secao.append(`<h6 class="container brown-text">${grupo.nome}</h6><div class="collection cardapio-grupo"></div>`);
+            const colecao = secao.find('.collection').last();
+            grupo.itens.forEach(item => {
+                colecao.append(`
+        <a id="${item.id}" data-nome="${item.nome}" data-preco="${item.preco}" class="collection-item waves-effect black-text item-pedido">
+          ${item.nome} <span class="right pizza-text">${DateHelper.real(item.preco)}</span>
+          <span class="badge remove">  </span>
+          <span class="badge quant"></span>
+        </a>`);
+            });
+        });
+    });
+    $('.tabs').tabs();
+}
 $(document).ready(function () {
     $('.fixed-action-btn').floatingActionButton();
     $('.tabs').tabs();
     $('.modal').modal();
     $('select').formSelect();
     $('.sidenav').sidenav();
-    $(".item-pedido").click(function () {
+    controller.carregarCardapio().then(renderCardapio);
+    $(document).on('click', '.item-pedido', function () {
         let val = $(this).children(".quant").text();
         let quant = val == '' ? 0 : parseInt(val);
         $(this).addClass("orange");
@@ -25,12 +49,12 @@ $(document).ready(function () {
             $(this).children(".remove").css({ color: "white" });
             $(this).children(".remove").html(``);
         }
-        let TratarNomeDoItem = $(this).text().substr(0, ($(this).text().trim().length - 11));
+        let TratarNomeDoItem = $(this).attr('data-nome') || $(this).text().substr(0, ($(this).text().trim().length - 11)).replace(/\s{2}/g, '').trim();
         let pedido = {
             id: $(this).attr('id'),
-            nome: TratarNomeDoItem.replace(/\s{2}/g, ''),
+            nome: TratarNomeDoItem,
             quantidade: quant + 1,
-            preco: 40
+            preco: parseFloat($(this).attr('data-preco')) || 0
         };
         return controller.adicionarPedido(pedido);
     });
@@ -43,18 +67,25 @@ $(document).ready(function () {
     });
     $("#check").click(function () {
         $('#list').html('');
-        let total = 0.0;
+        let subtotal = 0.0;
         controller.pedidosNoCarrinho.forEach(itens => {
-            total = total + (itens.quantidade * itens.preco);
+            subtotal = subtotal + (itens.quantidade * itens.preco);
             $('#list').append(`
             <blockquote class="blockquoteColor indigo lighten-5">
             ${itens.nome}
             <span class="right" style="font-size:13px;">
-            ${itens.quantidade} x R$ ${itens.preco}.00
+            ${itens.quantidade} x ${DateHelper.real(itens.preco)}
             </span>
             </blockquote>`);
         });
-        $('#total').html(`TOTAL : R$ ${total}.00`);
+        const taxa = subtotal * TAXA_SERVICO;
+        const total = subtotal + taxa;
+        $('#total').html(`
+      <div class="row">
+        <div class="col s12"><b>Subtotal:</b> ${DateHelper.real(subtotal)}</div>
+        <div class="col s12">Taxa de serviço (${(TAXA_SERVICO * 100)}%): ${DateHelper.real(taxa)}</div>
+        <div class="col s12"><b>TOTAL:</b> ${DateHelper.real(total)}</div>
+      </div>`);
     });
     $('#pedir').click(function () {
         if (controller.pedidosNoCarrinho.length === 0)

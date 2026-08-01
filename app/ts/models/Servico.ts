@@ -2,31 +2,42 @@ import { ApiFirebase } from "./ApiFirebase.js";
 import { DateHelper } from "../helpers/DateHelper.js";
 import { Pedido } from "./Carrinho.js";
 
+export const TAXA_SERVICO = 0.10;
+
 export class Servico{
 
   private _id: string;
   private _hora:Date;
   private _pedidos: Pedido[];
-
-  private _total: number =0;
-
+  private _status: string = 'pendente';
 
     constructor(ordem:ApiFirebase){
 
     this._id = ordem.id
     this._hora = new Date(ordem.hora)
     this._pedidos = ordem.pedidos;
-    
-    this.pedidos.forEach(item=> this._total = this._total+ (item.quantidade * item.preco))
+    this._status = ordem.status || 'pendente';
 
   }
 
+  get subtotal():number{
+    return this._pedidos.reduce((acc, item) => acc + (item.quantidade * item.preco), 0);
+  }
+
+  get taxa():number{
+    return this.subtotal * TAXA_SERVICO;
+  }
+
   get total():number{
-     return this._total 
+     return this.subtotal + this.taxa;
   }
 
   get id(){
     return this._id;
+  }
+
+  get status():string{
+    return this._status;
   }
 
   get hora():string{

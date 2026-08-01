@@ -2,4 +2,3 @@ node_modules/
 data/
 *.log
 config/serviceAccount.json
-config/*.json

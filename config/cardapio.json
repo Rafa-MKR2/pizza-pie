@@ -1,0 +1,109 @@
+{
+  "categorias": [
+    {
+      "id": "test1",
+      "nome": "Salgados",
+      "grupos": [
+        {
+          "nome": "Pizza média",
+          "itens": [
+            { "id": "1", "nome": "Pizza Calabresa (M)", "preco": 39.90 },
+            { "id": "2", "nome": "Pizza Catupiry (M)", "preco": 44.90 },
+            { "id": "3", "nome": "Pizza Mussarela (M)", "preco": 42.90 },
+            { "id": "4", "nome": "Pizza Portuguesa (M)", "preco": 46.90 },
+            { "id": "30", "nome": "Pizza Marguerita (M)", "preco": 43.90 }
+          ]
+        },
+        {
+          "nome": "Pizza grande",
+          "itens": [
+            { "id": "5", "nome": "Pizza Calabresa (G)", "preco": 52.90 },
+            { "id": "6", "nome": "Pizza Catupiry (G)", "preco": 57.90 },
+            { "id": "7", "nome": "Pizza Mussarela (G)", "preco": 55.90 },
+            { "id": "8", "nome": "Pizza Portuguesa (G)", "preco": 59.90 },
+            { "id": "31", "nome": "Pizza Quatro Queijos (G)", "preco": 61.90 }
+          ]
+        },
+        {
+          "nome": "Esfihas e salgados",
+          "itens": [
+            { "id": "32", "nome": "Esfiha de Carne", "preco": 6.50 },
+            { "id": "33", "nome": "Esfiha de Frango", "preco": 6.50 },
+            { "id": "34", "nome": "Coxinha de Frango", "preco": 7.50 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test2",
+      "nome": "Bebidas",
+      "grupos": [
+        {
+          "nome": "Refrigerantes",
+          "itens": [
+            { "id": "9", "nome": "Refri. Coca-cola Lata", "preco": 6.00 },
+            { "id": "10", "nome": "Refri. Coca-cola 2L", "preco": 12.00 },
+            { "id": "11", "nome": "Refri. Guaraná 2L", "preco": 10.00 },
+            { "id": "35", "nome": "Refri. Guaraná Lata", "preco": 5.00 },
+            { "id": "36", "nome": "Água Mineral 500ml", "preco": 3.00 }
+          ]
+        },
+        {
+          "nome": "Vitaminas",
+          "itens": [
+            { "id": "12", "nome": "Vitamina Goiaba", "preco": 12.00 },
+            { "id": "13", "nome": "Vitamina Acerola", "preco": 12.00 },
+            { "id": "14", "nome": "Vitamina Banana", "preco": 12.00 }
+          ]
+        },
+        {
+          "nome": "Sucos",
+          "itens": [
+            { "id": "15", "nome": "Suco Melancia", "preco": 8.00 },
+            { "id": "16", "nome": "Suco Tangerina", "preco": 8.00 },
+            { "id": "17", "nome": "Suco Limão", "preco": 8.00 }
+          ]
+        },
+        {
+          "nome": "Cafés",
+          "itens": [
+            { "id": "18", "nome": "Café Expresso", "preco": 5.00 },
+            { "id": "19", "nome": "Cappuccino", "preco": 8.00 },
+            { "id": "20", "nome": "Café Normal", "preco": 4.00 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "test3",
+      "nome": "Sobremesas",
+      "grupos": [
+        {
+          "nome": "Bolos",
+          "itens": [
+            { "id": "21", "nome": "Bolo de cenoura", "preco": 9.00 },
+            { "id": "22", "nome": "Bolo de chocolate", "preco": 9.00 },
+            { "id": "23", "nome": "Bolo Confetado", "preco": 9.00 }
+          ]
+        },
+        {
+          "nome": "Pudim",
+          "itens": [
+            { "id": "24", "nome": "Pudim de Chocolate", "preco": 8.00 },
+            { "id": "25", "nome": "Pudim de Morango", "preco": 8.00 },
+            { "id": "26", "nome": "Pudim de Leite", "preco": 8.00 }
+          ]
+        },
+        {
+          "nome": "Sorvete",
+          "itens": [
+            { "id": "27", "nome": "Sorv. Chocolate", "preco": 7.00 },
+            { "id": "28", "nome": "Sorv. Uva", "preco": 7.00 },
+            { "id": "29", "nome": "Sorv. Morango", "preco": 7.00 },
+            { "id": "37", "nome": "Petit Gâteau", "preco": 14.00 }
+          ]
+        }
+      ]
+    }
+  ]
+}

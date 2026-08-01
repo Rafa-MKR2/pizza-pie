@@ -28,11 +28,23 @@ class PedidosDao {
     const novo = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
       hora: pedido.hora,
-      pedidos: pedido.pedidos
+      pedidos: pedido.pedidos,
+      status: 'pendente'
     };
     pedidos.push(novo);
     salvar(pedidos);
     return Promise.resolve(novo);
+  }
+
+  atualizarStatus(key, status) {
+    const pedidos = carregar().map(p => {
+      if (p.id === key) {
+        p.status = status;
+      }
+      return p;
+    });
+    salvar(pedidos);
+    return Promise.resolve();
   }
 
   remove(key) {

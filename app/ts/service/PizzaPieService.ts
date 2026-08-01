@@ -41,5 +41,18 @@ export class PizzaPieService{
           body:JSON.stringify(key)
             })
     }
+
+    atualizarStatus(id: string, status: string){
+        return fetch('/pedidos/atualiza-status',{
+          method: "POST",
+          headers: {'Content-Type': 'application/json'},
+          body:JSON.stringify({ key: id, status })
+        })
+    }
+
+    obterCardapio(): Promise<any>{
+        return fetch('/cardapio')
+          .then(res => res.json());
+    }
     
 }

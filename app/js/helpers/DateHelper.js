@@ -30,4 +30,7 @@ export class DateHelper {
             'Você não pode fazer pedidos nos finais de semana!'
             : 'Pedido realizado com sucesso!';
     }
+    static real(valor) {
+        return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
 }

@@ -17,6 +17,63 @@ body{
   background-color: #f5f5f5;
 }
 
+/* paleta pizzaria */
+.pizza-bg {
+  background-color: #8C1D1D !important;
+}
+
+.pizza-bg-dark {
+  background-color: #6B1414 !important;
+}
+
+.pizza-text {
+  color: #B3302E;
+}
+
+.tabs .tab a {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.tabs .tab a:hover,
+.tabs .tab a.active {
+  color: #fff !important;
+}
+.tabs .indicator {
+  background-color: #F5C518 !important;
+}
+
+.item-pedido.orange {
+  background-color: #B3302E !important;
+  color: #fff !important;
+}
+
+.badge.green {
+  background-color: #B3302E !important;
+}
+
+.waves-green {
+  color: #B3302E !important;
+}
+
+/* chips de status do pedido */
+.status-chip {
+  font-size: 0.85rem;
+  text-transform: capitalize;
+  color: #fff;
+}
+.status-pendente {
+  background-color: #f39c12 !important;
+}
+.status-em_preparo {
+  background-color: #2980b9 !important;
+}
+.status-pronto {
+  background-color: #27ae60 !important;
+}
+.status-entregue {
+  background-color: #7f8c8d !important;
+}
+
+
 /* estilo inicial */
 body {
   background-color: #F2F2F2;
