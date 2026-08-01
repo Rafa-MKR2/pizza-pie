@@ -1,51 +1,33 @@
-const database =  require('../config/firebase-dao')();
+const PedidosDao = require('../config/pedidos-dao')();
 
-module.exports = app =>{
-    app.get('/pedidos', (request, response)=>{
+module.exports = app => {
+  app.get('/pedidos', (req, res) => {
+    new PedidosDao().lista()
+      .then(pedidos => res.status(200).json(pedidos.reverse()))
+      .catch(() => res.status(500).json({ erro: 'Erro ao listar pedidos' }));
+  });
 
+  app.post('/pedidos/cadastra-pedido', (req, res) => {
+    const { hora, pedidos } = req.body;
 
-        var firebase = new database;    
-            firebase.lista().then(pedidos => 
-                response.status(200).json(pedidos.reverse())
-                ).catch(err=>  response.status(200).json(err));  
-      
-           
-    })
+    if (!hora || !Array.isArray(pedidos) || pedidos.length === 0) {
+      return res.status(400).json({ erro: 'horario e pedidos são obrigatórios' });
+    }
 
-    app.post('/pedidos/cadastra-pedido', function(request,response){
+    new PedidosDao().cadastrar({ hora, pedidos })
+      .then(() => res.end())
+      .catch(() => res.status(500).json({ erro: 'Erro ao salvar pedido' }));
+  });
 
-        var pedido = request.body;
-        request.assert("hora","horario do pedido deve ser fornecido")
-        .notEmpty();
-        request.assert("pedidos", "forneça os pedidos corretamente dentro do formato")
-        .isArray().notEmpty()
+  app.post('/pedidos/remove-pedido', (req, res) => {
+    const { key } = req.body;
 
-        const errors = request.validationErrors();
-        if (errors) {
-            console.log(errors)
-          return response.status(400).json(errors);
-        }
-        var firebase = new database;    
-            firebase.cadastrar(pedido);
+    if (!key) {
+      return res.status(400).json({ erro: 'key é obrigatória' });
+    }
 
-        response.end()
-      
-    })
-
-    app.post('/pedidos/remove-pedido', function(request,response){
-
-        var id = request.body;
-        request.assert("key","você deve fornecer o id no formato string")
-        .notEmpty()
-        
-        const errors = request.validationErrors();
-        if (errors) {
-            console.log(errors)
-          return response.status(400).json(errors);
-        }
-        var firebase = new database;    
-            firebase.remove(id.key);
-            response.end()
-      
-    })
-}
+    new PedidosDao().remove(key)
+      .then(() => res.end())
+      .catch(() => res.status(500).json({ erro: 'Erro ao remover pedido' }));
+  });
+};

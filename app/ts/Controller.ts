@@ -10,8 +10,8 @@ import { Mensagem } from './models/Mensagem.js';
 
    private _carrinho: Carrinho;
    private _serviceApi = new PizzaPieService();
-   private _OrdemDePedidos:Servico[];
-   private _socket = io.connect('http://localhost:8080');
+   private _OrdemDePedidos:Servico[] = [];
+   private _socket = io();
    private _mensagem: Mensagem = new Mensagem();
 
     constructor(){
@@ -68,7 +68,7 @@ async listarPedidos(){
         return importaOrdemDeServico
        
       }catch(err){
-          this._mensagem.create(err,{duracao:9000})
+          this._mensagem.create(String(err),{duracao:9000})
         }
     }
 
@@ -85,9 +85,7 @@ async listarPedidos(){
    private _update(services: Servico[]){
 
     
-       this._OrdemDePedidos = [].concat(services)
-      
-       //view
+       this._OrdemDePedidos = services.slice()
        $('#badgePedido').html(`
        ${!this._OrdemDePedidos.length? '' :
       ` <span class="itensBadge badge green" style="color:white;" >${this._OrdemDePedidos.length}</span>`}`)
@@ -125,19 +123,16 @@ async listarPedidos(){
        })
 
 
-       const contextoDeController =  (id:string)=>{
-
-        
-        return $.bind(Controllers).call(this.deletar(id))
-       }
+       const contextoDeController = (id: string) => this.deletar(id);
 
        $('.delete').click(function(){
-        var modal = document.querySelector('.modalDelete');
-        var instance = M.Modal.getInstance(modal);
-        instance.open()
-       
-        $('.deleteItemAertModal')
-        return contextoDeController($(this).attr('id'))
+        const modal = document.querySelector('.modalDelete');
+        if (modal) {
+          const instance = M.Modal.getInstance(modal);
+          instance.open();
+        }
+        const id = $(this).attr('id');
+        if (id) return contextoDeController(id);
        })
     
    
@@ -148,7 +143,7 @@ async listarPedidos(){
 
 
   playNotification(Mensagem: string, tempo: number){
-    let audio:HTMLAudioElement =  new Audio("https://firebasestorage.googleapis.com/v0/b/portifolio-rafa.appspot.com/o/audio%2FTapping.mp3?alt=media&token=f1a1af1c-118c-49f0-a7d6-0e6fda678d85")  
+    let audio:HTMLAudioElement =  new Audio("sfx/Tapping.mp3")  
 
     return window.navigator.mediaDevices.getUserMedia({ audio:true})
         .then(()=>{

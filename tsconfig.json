@@ -1,11 +1,16 @@
 {
     "compilerOptions":{
-    "target": "es6",
+    "target": "es2017",
+    "module": "es2020",
+    "moduleResolution": "bundler",
+    "rootDir": "app/ts",
     "outDir": "app/js",
     "noEmitOnError": true,
     "removeComments": true,
     "noImplicitAny": true,
-    "module": "system"
+    "noImplicitThis": false,
+    "strict": false,
+    "types": ["jquery", "materialize-css", "socket.io-client"]
     },
     "include":[
         "app/ts/**/*"

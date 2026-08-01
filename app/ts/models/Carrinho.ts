@@ -17,22 +17,16 @@ export class Carrinho {
 
     add(item:Pedido): Pedido[]{
 
-        let pedido:Pedido ={
-            id: item.id, 
-            nome: item.nome,
-            quantidade: item.quantidade,
-            preco: item.preco
-            }
-
-        !this._lista ?  this._lista.push(pedido) : this._lista;
-
         const existente :boolean = this._lista.some(itens => itens.id === item.id)
 
-        // se existir item já adicionado incrementa apenas quantidadeidade
-        existente ?
-            this._lista.forEach(lista => 
-                item.id===lista.id ? lista.quantidade=item.quantidade : lista) 
-                : this._lista.push(pedido)
+        // se existir item já adicionado incrementa apenas quantidade
+        if (existente) {
+            this._lista.forEach(lista => {
+                if (item.id === lista.id) lista.quantidade = item.quantidade;
+            });
+        } else {
+            this._lista.push(item);
+        }
 
        return  this.atualizaLista();
       
@@ -51,7 +45,7 @@ export class Carrinho {
 
 
     lista(): Pedido[] {
-        return [].concat(this._lista)
+        return this._lista.slice();
      }
 
 

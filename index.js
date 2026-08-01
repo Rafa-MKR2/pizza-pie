@@ -1,41 +1,39 @@
+const express = require('express');
+const fs = require('fs');
 const app = require('./config/express-config')();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
-var port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
-
- app.get('/', function(req, res){
-  res.writeHead(200,{'Content-Type': 'text/html'})
-
-   return res.end('./app/index.html');
-
- })
- server.listen(port)
-
- io.on('connection', function (socket) {
-
-    socket.emit('conexao', { user: socket.id});
-
-   
-    socket.on('disconnect', function () {
-      io.emit('disconnect');
-      console.log("desconetado")
-    });
-
-    socket.on('ordem', function (data) {
-      console.log(data)
-      socket.broadcast.emit('ordem',data)
-    });
-
-
-    socket.on('exclusao', function (data) {
-      console.log(data)
-      socket.broadcast.emit('exclusao',data)
-    });
+app.get('/', function (req, res) {
+  fs.readFile('./app/index.html', 'utf8', function (err, data) {
+    if (err) {
+      res.writeHead(404);
+      return res.end('Página não encontrada');
+    }
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(data);
+    res.end();
+  });
 });
 
+server.listen(port, function () {
+  console.log('Servidor rodando na porta :' + port);
+});
 
+io.on('connection', function (socket) {
+  socket.emit('conexao', { user: socket.id });
 
- console.log('Servidor rodando na portar :'+ port)
- 
+  socket.on('disconnect', function () {
+    console.log('desconectado');
+  });
+
+  socket.on('ordem', function (data) {
+    socket.broadcast.emit('ordem', data);
+  });
+
+  socket.on('exclusao', function (data) {
+    socket.broadcast.emit('exclusao', data);
+  });
+});

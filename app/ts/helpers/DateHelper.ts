@@ -24,7 +24,7 @@ export class DateHelper{
 
         let horas = data.getHours()<9 ? '0'+data.getHours() : data.getHours() ,
             min = data.getMinutes() <9 ? '0'+data.getMinutes() : data.getMinutes(),
-            ampm = horas>12 ? 'pm' : 'am';
+            ampm = data.getHours()>12 ? 'pm' : 'am';
 
         return `${horas}:${min} ${!turno ? '': ampm}`
     }
